@@ -37,9 +37,12 @@
     </div>
 <script>
  const apiKey = "f1249a3dc101ffc05289faa69771faa5";
- const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=Pune"
+ const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q="
+ const searchBox = document.querySelector(".search input");
+ const searchBtn = document.querySelector(".search button");
+
  async function checkwether(city){
-    const response = await fetch(apiUrl + `&appid=${apiKey}`)
+    const response = await fetch(apiUrl + city + `&appid=${apiKey}`)
     var data = await response.json();
 
     console.log(data)
@@ -49,6 +52,9 @@
     document.querySelector(".wind").innerHTML = data.wind.speed + "km/hr";
  }
 
+ searchBtn.addEventListener("click" , ()=> {
+    checkwether(searchBox.value);
+ })
  checkwether();
 </script>
 </body>
